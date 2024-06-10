@@ -1,0 +1,8 @@
+Guides about Classical Mechanics concepts including:
+    Newtonian approach
+    Constraining things (by deduction - arc length, etc. - and Lagrange multipliers)
+    Moving things
+    Rotating things
+    Central forces and Orbits 
+    Normal modes and waves
+    Lagrangian and Hamiltonian mechanics

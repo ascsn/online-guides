@@ -1,0 +1,13 @@
+Guides about Quantum Mechanics concepts including:
+  Representations
+      “Everything is linear algebra”
+      Dirac’s notation
+  Schrodinger equation
+      Eigenstates -> “Normal modes”
+      Evolution operator
+      Bound states and scattering states Josh
+  The Harmonic Oscillator
+      Creation and annihilation operators
+  Angular momentum, spins, groups, and all that
+  Scattering theory
+  Perturbation theory
