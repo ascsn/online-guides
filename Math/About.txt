@@ -1,0 +1,14 @@
+Guides about math concepts including:
+  Derivatives and Integrals 
+  Taylor Series
+  Differential equations
+  Linear algebra:
+    Vectors and matrices
+    Projections
+    Change of basis
+    Eigensystems
+  Vector calculus
+  Other topics:
+    Complex numbers
+    Fourier transforms
+    Distributions (delta functions)
