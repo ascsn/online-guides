@@ -1,0 +1,490 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20068,        482]
+NotebookOptionsPosition[     19545,        464]
+NotebookOutlinePosition[     19981,        481]
+CellTagsIndexPosition[     19938,        478]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"V", ",", "sol", ",", "\[Psi]", ",", 
+       RowBox[{"xMax", "=", 
+        RowBox[{"Rout", "+", "5"}]}], ",", "\[Psi]sol", ",", "baseRange", ",",
+        "regionFills", ",", "plotLines", ",", "yMax"}], "}"}], ",", 
+     RowBox[{"(*", 
+      RowBox[{"Define", " ", "potential"}], "*)"}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"V", "[", "x_", "]"}], ":=", 
+       RowBox[{"Piecewise", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"V0", ",", 
+             RowBox[{"0", "<=", "x", "<", "Rin"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"Vb", ",", 
+             RowBox[{"Rin", "<=", "x", "<", "Rout"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", 
+             RowBox[{"x", ">=", "Rout"}]}], "}"}]}], "}"}], ",", "0"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"Numerical", " ", "solution"}], "*)"}], 
+      RowBox[{"sol", "=", 
+       RowBox[{"NDSolve", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Psi]", "''"}], "[", "x", "]"}], "==", 
+            RowBox[{"2", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"V", "[", "x", "]"}], "-", "E"}], ")"}], " ", 
+             RowBox[{"\[Psi]", "[", "x", "]"}]}]}], ",", 
+           RowBox[{
+            RowBox[{"\[Psi]", "[", "0", "]"}], "==", "0"}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Psi]", "'"}], "[", "0", "]"}], "==", "1"}]}], "}"}], 
+         ",", "\[Psi]", ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "0", ",", "xMax"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"\[Psi]sol", "=", 
+       RowBox[{
+        RowBox[{"\[Psi]", "[", "x", "]"}], "/.", " ", 
+        RowBox[{"sol", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"baseRange", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "2"}], ",", "6"}], "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"yMax", "=", 
+       RowBox[{"baseRange", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"regionFills", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"LightYellow", ",", 
+           RowBox[{"Opacity", "[", "0.3", "]"}], ",", 
+           RowBox[{"EdgeForm", "[", "None", "]"}], ",", 
+           RowBox[{"Rectangle", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"Rin", ",", "V0"}], "}"}]}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"LightBlue", ",", 
+           RowBox[{"Opacity", "[", "0.3", "]"}], ",", 
+           RowBox[{"EdgeForm", "[", "None", "]"}], ",", 
+           RowBox[{"Rectangle", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Rin", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"Rout", ",", "Vb"}], "}"}]}], "]"}]}], "}"}]}], "}"}]}],
+       ";", "\[IndentingNewLine]", 
+      RowBox[{"plotLines", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Thick", ",", "Blue", ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"x", ",", 
+                RowBox[{"\[Psi]sol", "/.", " ", 
+                 RowBox[{"x", "->", "x"}]}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"x", ",", "0", ",", "xMax", ",", "0.01"}], "}"}]}], 
+             "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"Thick", ",", "Orange", ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"x", ",", 
+                RowBox[{"V", "[", "x", "]"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"x", ",", "0", ",", "xMax", ",", "0.01"}], "}"}]}], 
+             "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"Dashed", ",", "Red", ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "E"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"xMax", ",", "E"}], "}"}]}], "}"}], "]"}]}], "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"Dashed", ",", "Black", ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Rin", ",", "0"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"Rin", ",", "yMax"}], "}"}]}], "}"}], "]"}], ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Rout", ",", "0"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"Rout", ",", "yMax"}], "}"}]}], "}"}], "]"}]}], 
+          "}"}]}], "}"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Show", "[", 
+       RowBox[{
+        RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"regionFills", ",", "plotLines"}], "}"}], ",", 
+          RowBox[{"Axes", "->", "True"}], ",", 
+          RowBox[{"AxesOrigin", "->", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "xMax"}], "}"}], ",", "baseRange"}], "}"}]}], 
+          ",", 
+          RowBox[{"AxesLabel", "->", 
+           RowBox[{"{", 
+            RowBox[{"\"\<x\>\"", ",", "\"\<Value\>\""}], "}"}]}], ",", 
+          RowBox[{"PlotLabel", "->", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Wavefunction and Potential at E = \>\"", ",", 
+                RowBox[{"NumberForm", "[", 
+                 RowBox[{"E", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"3", ",", "2"}], "}"}]}], "]"}]}], "}"}], "]"}], 
+             ",", "Bold"}], "]"}]}], ",", 
+          RowBox[{"ImageSize", "->", "Large"}]}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"AxesStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{
+           RowBox[{"GrayLevel", "[", "0", "]"}], ",", 
+           RowBox[{"AbsoluteThickness", "[", "1.495`", "]"}]}], "]"}]}], ",", 
+        RowBox[{"Method", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"\"\<DefaultBoundaryStyle\>\"", "\[Rule]", "Automatic"}], 
+           ",", 
+           RowBox[{"\"\<DefaultGraphicsInteraction\>\"", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"\"\<Version\>\"", "\[Rule]", "1.2`"}], ",", 
+              RowBox[{"\"\<TrackMousePosition\>\"", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"True", ",", "False"}], "}"}]}], ",", 
+              RowBox[{"\"\<Effects\>\"", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"\"\<Highlight\>\"", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<ratio\>\"", "\[Rule]", "2"}], "}"}]}], ",", 
+                 RowBox[{"\"\<HighlightPoint\>\"", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<ratio\>\"", "\[Rule]", "2"}], "}"}]}], ",", 
+                 RowBox[{"\"\<Droplines\>\"", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"\"\<freeformCursorMode\>\"", "\[Rule]", "True"}],
+                     ",", 
+                    RowBox[{"\"\<placement\>\"", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"\"\<x\>\"", "\[Rule]", "\"\<All\>\""}], ",", 
+                    RowBox[{"\"\<y\>\"", "\[Rule]", "\"\<None\>\""}]}], 
+                    "}"}]}]}], "}"}]}]}], "}"}]}]}], "}"}]}], ",", 
+           RowBox[{"\"\<DefaultMeshStyle\>\"", "\[Rule]", 
+            RowBox[{"AbsolutePointSize", "[", "6", "]"}]}], ",", 
+           RowBox[{"\"\<ScalingFunctions\>\"", "\[Rule]", "None"}], ",", 
+           RowBox[{"\"\<CoordinatesToolOptions\>\"", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"\"\<DisplayFunction\>\"", "\[Rule]", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Identity", "[", "#1", "]"}], "&"}], ")"}], "[", 
+                    RowBox[{
+                    "#1", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "]"}], ",", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Identity", "[", "#1", "]"}], "&"}], ")"}], "[", 
+                    RowBox[{
+                    "#1", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], "]"}]}], "}"}], "&"}], ")"}]}],
+               ",", 
+              RowBox[{"\"\<CopiedValueFunction\>\"", "\[Rule]", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Identity", "[", "#1", "]"}], "&"}], ")"}], "[", 
+                    RowBox[{
+                    "#1", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "]"}], ",", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Identity", "[", "#1", "]"}], "&"}], ")"}], "[", 
+                    RowBox[{
+                    "#1", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], "]"}]}], "}"}], "&"}], 
+                ")"}]}]}], "}"}]}]}], "}"}]}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", "None"}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"14", ",", 
+           RowBox[{"GrayLevel", "[", "0", "]"}]}], "}"}]}]}], 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       "]"}]}]}], "\[IndentingNewLine]", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"E", ",", "1.0", ",", "\"\<Energy\>\""}], "}"}], ",", "0.01", 
+     ",", "10", ",", "0.01", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"V0", ",", "1.5", ",", "\"\<Well height (Region I)\>\""}], 
+      "}"}], ",", "0.1", ",", "4", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Vb", ",", "3.0", ",", "\"\<Barrier height (Region II)\>\""}], 
+      "}"}], ",", "2", ",", "8", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Rin", ",", "1.0", ",", "\"\<Rin\>\""}], "}"}], ",", "0.5", ",",
+      "3", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Rout", ",", "2.5", ",", "\"\<Rout\>\""}], "}"}], ",", "1.5", 
+     ",", "5", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"ControlPlacement", "->", "Top"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.958470547447754*^9, 3.958470588266449*^9}, {
+  3.958470622124555*^9, 3.958470622559292*^9}, {3.9584718729969277`*^9, 
+  3.958471873386812*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"3e4646d3-727c-e34b-a281-9a74bae1eb89"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{E$$ = 3.65, $CellContext`Rin$$ = 
+    3., $CellContext`Rout$$ = 5., $CellContext`V0$$ = 2., $CellContext`Vb$$ = 
+    4.96, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[E$$], 1., "Energy"}, 0.01, 10, 0.01, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`V0$$], 1.5, "Well height (Region I)"}, 0.1, 4, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`Vb$$], 3., "Barrier height (Region II)"}, 2, 8, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`Rin$$], 1., "Rin"}, 0.5, 3, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`Rout$$], 2.5, "Rout"}, 1.5, 5, ControlType -> 
+      Manipulator}}, Typeset`size$$ = {576., {229., 233.29140625000002`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {
+       E$$ = 1., $CellContext`Rin$$ = 1., $CellContext`Rout$$ = 
+        2.5, $CellContext`V0$$ = 1.5, $CellContext`Vb$$ = 3.}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`V$, $CellContext`sol$, $CellContext`\[Psi]$, \
+$CellContext`xMax$ = $CellContext`Rout$$ + 
+          5, $CellContext`\[Psi]sol$, $CellContext`baseRange$, \
+$CellContext`regionFills$, $CellContext`plotLines$, $CellContext`yMax$}, \
+$CellContext`V$[
+           Pattern[$CellContext`x$, 
+            Blank[]]] := Piecewise[{{$CellContext`V0$$, 
+             Inequality[
+             0, LessEqual, $CellContext`x$, 
+              Less, $CellContext`Rin$$]}, {$CellContext`Vb$$, 
+             
+             Inequality[$CellContext`Rin$$, LessEqual, $CellContext`x$, 
+              Less, $CellContext`Rout$$]}, {
+            0, $CellContext`x$ >= $CellContext`Rout$$}}, 
+           0]; $CellContext`sol$ = 
+         NDSolve[{
+           Derivative[2][$CellContext`\[Psi]$][$CellContext`x] == 
+            2 ($CellContext`V$[$CellContext`x] - 
+              E$$) $CellContext`\[Psi]$[$CellContext`x], $CellContext`\[Psi]$[
+             0] == 0, Derivative[1][$CellContext`\[Psi]$][0] == 
+            1}, $CellContext`\[Psi]$, {$CellContext`x, 
+            0, $CellContext`xMax$}]; $CellContext`\[Psi]sol$ = ReplaceAll[
+           $CellContext`\[Psi]$[$CellContext`x], 
+           Part[$CellContext`sol$, 1]]; $CellContext`baseRange$ = {-2, 
+          6}; $CellContext`yMax$ = 
+         Part[$CellContext`baseRange$, 2]; $CellContext`regionFills$ = {{
+           LightYellow, 
+            Opacity[0.3], 
+            EdgeForm[None], 
+            Rectangle[{0, 0}, {$CellContext`Rin$$, $CellContext`V0$$}]}, {
+           LightBlue, 
+            Opacity[0.3], 
+            EdgeForm[None], 
+            
+            Rectangle[{$CellContext`Rin$$, 
+              0}, {$CellContext`Rout$$, $CellContext`Vb$$}]}}; \
+$CellContext`plotLines$ = {{Thick, Blue, 
+            Line[
+             Table[{$CellContext`x, 
+               
+               ReplaceAll[$CellContext`\[Psi]sol$, $CellContext`x -> \
+$CellContext`x]}, {$CellContext`x, 0, $CellContext`xMax$, 0.01}]]}, {
+           Thick, Orange, 
+            Line[
+             Table[{$CellContext`x, 
+               $CellContext`V$[$CellContext`x]}, {$CellContext`x, 
+               0, $CellContext`xMax$, 0.01}]]}, {Dashed, Red, 
+            Line[{{0, E$$}, {$CellContext`xMax$, E$$}}]}, {Dashed, Black, 
+            
+            Line[{{$CellContext`Rin$$, 
+               0}, {$CellContext`Rin$$, $CellContext`yMax$}}], 
+            
+            Line[{{$CellContext`Rout$$, 
+               0}, {$CellContext`Rout$$, $CellContext`yMax$}}]}}; Show[
+          
+          Graphics[{$CellContext`regionFills$, $CellContext`plotLines$}, Axes -> 
+           True, AxesOrigin -> {0, 0}, 
+           PlotRange -> {{0, $CellContext`xMax$}, $CellContext`baseRange$}, 
+           AxesLabel -> {"x", "Value"}, PlotLabel -> Style[
+             Row[{"Wavefunction and Potential at E = ", 
+               NumberForm[E$$, {3, 2}]}], Bold], ImageSize -> Large], 
+          AxesStyle -> Directive[
+            GrayLevel[0], 
+            AbsoluteThickness[1.495]], 
+          Method -> {
+           "DefaultBoundaryStyle" -> Automatic, 
+            "DefaultGraphicsInteraction" -> {
+             "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+              "Effects" -> {
+               "Highlight" -> {"ratio" -> 2}, 
+                "HighlightPoint" -> {"ratio" -> 2}, 
+                "Droplines" -> {
+                 "freeformCursorMode" -> True, 
+                  "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+            "DefaultMeshStyle" -> AbsolutePointSize[6], "ScalingFunctions" -> 
+            None, "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+                (Identity[#]& )[
+                 Part[#, 1]], 
+                (Identity[#]& )[
+                 Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+                (Identity[#]& )[
+                 Part[#, 1]], 
+                (Identity[#]& )[
+                 Part[#, 2]]}& )}}, PlotLabel -> None, LabelStyle -> {14, 
+            GrayLevel[0]}]], 
+      "Specifications" :> {{{E$$, 1., "Energy"}, 0.01, 10, 0.01, Appearance -> 
+         "Labeled"}, {{$CellContext`V0$$, 1.5, "Well height (Region I)"}, 0.1,
+          4, Appearance -> 
+         "Labeled"}, {{$CellContext`Vb$$, 3., "Barrier height (Region II)"}, 
+         2, 8, Appearance -> "Labeled"}, {{$CellContext`Rin$$, 1., "Rin"}, 
+         0.5, 3, Appearance -> 
+         "Labeled"}, {{$CellContext`Rout$$, 2.5, "Rout"}, 1.5, 5, Appearance -> 
+         "Labeled"}}, "Options" :> {ControlPlacement -> Top}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{622., {325.634033203125, 331.365966796875}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.958470496404363*^9, {3.958470580547308*^9, 3.958470588915415*^9}, 
+   3.9584706232225723`*^9, 3.958471873705576*^9, {3.9584826691553097`*^9, 
+   3.958482675222933*^9}},
+ CellLabel->"Out[1]=",ExpressionUUID->"dd15b3e1-42c7-af45-8fb6-3b7fdb6752db"]
+}, Open  ]]
+},
+WindowSize->{1280, 732},
+WindowMargins->{{-5.5, Automatic}, {Automatic, -5.5}},
+Magnification:>1. Inherited,
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"cab9dca9-1f7e-8444-a7c3-aaae1b4531eb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 12143, 298, 523, "Input",ExpressionUUID->"3e4646d3-727c-e34b-a281-9a74bae1eb89"],
+Cell[12726, 322, 6803, 139, 698, "Output",ExpressionUUID->"dd15b3e1-42c7-af45-8fb6-3b7fdb6752db"]
+}, Open  ]]
+}
+]
+*)
+
